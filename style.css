@@ -2,6 +2,10 @@ h1 {
     text-align: center;
    }
 
+body {
+    font-family: "Open Sans", sans-serif;
+}  
+
 #game-container {
   display: flex;
   align-items: center;
