@@ -40,7 +40,6 @@ document.addEventListener("keyup", (e) => {
         checkGuess()
         return
     }
-    debugger
     let found = pressedKey.match(/[a-z0-9_ğüşöçıİĞÜŞÖÇ]/i)
     if (!found || found.length > 1) {
         return
