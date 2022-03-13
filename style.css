@@ -4,6 +4,7 @@ h1 {
 
 body {
     font-family: "Open Sans", sans-serif;
+    background-image: url(nier.jpg);
 }  
 
 #game-container {

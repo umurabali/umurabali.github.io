@@ -40,8 +40,8 @@ document.addEventListener("keyup", (e) => {
         checkGuess()
         return
     }
-
-    let found = pressedKey.match(/[a-z]/gi)
+    debugger
+    let found = pressedKey.match(/[a-z0-9_ğüşöçıİĞÜŞÖÇ]/i)
     if (!found || found.length > 1) {
         return
     } else {
@@ -50,8 +50,7 @@ document.addEventListener("keyup", (e) => {
 })
 
 document.getElementById("keyboard-cont").addEventListener("click", (e) => {
-    const target = e.target
-    
+    const target = e.target   
     if (!target.classList.contains("keyboard-button")) {
         return
     }
@@ -96,7 +95,7 @@ function checkGuess () {
     }
 
     if (guessString.length != 5) {
-        alert("Not enough letters!")
+        sendInfo("Eksik oldu sanki")
         return
     }
     
@@ -106,20 +105,15 @@ function checkGuess () {
         let letter = currentGuess[i]
         
         let letterPosition = rightGuess.indexOf(currentGuess[i])
-        // is letter in the correct guess
+        
        
         if (letterPosition === -1) {
             letterColor = 'grey'
         } else {
-            // now, letter is definitely in word
-            // if letter index and right guess index are the same
-            // letter is in the right position 
             
-            if (currentGuess[i] === rightGuess[i]) {
-                // shade green 
+            if (currentGuess[i] === rightGuess[i]) {               
                 letterColor = 'LawnGreen'
-            } else {
-                // shade box yellow
+            } else {               
                 letterColor = 'yellow'
             }
 
@@ -127,25 +121,23 @@ function checkGuess () {
         }
 
         let delay = 250 * i
-        setTimeout(()=> {
-            //shade box
+        setTimeout(()=> {           
             box.style.backgroundColor = letterColor
             shadeKeyBoard(letter, letterColor)
         }, delay)
     }
 
     if (guessString === rightGuessString) {
-        alert("You guessed right! Game over!")
+        sendInfo("HELAL")
         guessCount = 0
         return
     } else {
         guessCount -= 1;
         currentGuess = [];
         nextLetter = 0;
-
+        sendInfo("Cevabınız yalandır.")
         if (guessCount === 0) {
-            alert("You've run out of guesses! Game over!")
-            alert(`The right word was: "${guessCount}"`)
+            sendInfo(`Bilemediğin cevap buydu işte: "${rightGuessString}"`)
         }
     }
 }
@@ -166,4 +158,8 @@ function shadeKeyBoard(letter, color) {
             break
         }
     }
+}
+
+function sendInfo(message) {
+    document.getElementById("information-container").innerHTML = message;
 }
